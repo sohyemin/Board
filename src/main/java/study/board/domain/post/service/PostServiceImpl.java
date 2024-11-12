@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.board.domain.post.dto.PostRequest;
 import study.board.domain.post.dto.PostResponce;
+import study.board.domain.post.entity.Post;
 import study.board.domain.post.repository.PostRepository;
 import study.board.domain.user.entity.User;
 import study.board.domain.user.repository.UserRepository;
@@ -72,16 +73,24 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public void updatePost(Long postId, PostRequest postRequest) {
+        Post findPost = postRepository.findById(postId).orElseThrow(() -> {
+            log.error("대상이 존재하지 않습니다.");
+            throw new RuntimeException("Can't find post By id : " + postId);
+        });
 
+        findPost.update(postRequest);
+
+        postRepository.save(findPost);
+        log.info("갱신에 성공했습니다.");
     }
 
     @Override
     public void deleteById(Long postId) {
-
+        postRepository.deleteById(postId);
     }
 
     @Override
     public void deleteAll() {
-
+        postRepository.deleteAll();
     }
 }

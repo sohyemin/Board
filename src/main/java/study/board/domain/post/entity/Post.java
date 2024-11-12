@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import study.board.domain.common.BaseTimeEntity;
 import study.board.domain.post.dto.PostRequest;
 import study.board.domain.post.enums.Poststatus;
 import study.board.domain.user.entity.User;
@@ -42,5 +43,13 @@ public class Post extends BaseTimeEntity {
         this.title = title;
         this.content = content;
         this.status = status;
+    }
+
+    public Post update(PostRequest request){
+        return Post.builder()
+                .title(request.getTitle())
+                .content(request.getContent())
+                .status(request.getStatus())
+                .build();
     }
 }
