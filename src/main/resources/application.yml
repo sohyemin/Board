@@ -18,7 +18,7 @@ spring:
   jpa:
     open-in-view: true # open-in-view: true
     hibernate:
-      ddl-auto: update # update, create, create-drop, validate, none
+      ddl-auto: create # update, create, create-drop, validate, none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true

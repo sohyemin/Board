@@ -6,7 +6,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import study.board.domain.post.entity.Post;
 import study.board.domain.user.enums.UserRole;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -16,7 +20,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private Long id;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private List<Post> posts = new ArrayList<>();
 
     @Column(nullable = false)
     private String name;
