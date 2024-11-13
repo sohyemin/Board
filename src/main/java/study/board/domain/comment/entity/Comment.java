@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import study.board.domain.comment.dto.CommentRequest;
 import study.board.domain.comment.enums.CommentStatus;
 import study.board.domain.common.BaseTimeEntity;
 import study.board.domain.post.entity.Post;
@@ -44,7 +45,15 @@ public class Comment extends BaseTimeEntity {
         this.post = post;
     }
 
-    private void update() {
+    public void update(CommentRequest request) {
+        Comment.builder()
+                .content(request.getContent())
+                .build();
+    }
 
+    public void deleteStatus() {
+        Comment.builder()
+                .status(CommentStatus.DELETE)
+                .build();
     }
 }
